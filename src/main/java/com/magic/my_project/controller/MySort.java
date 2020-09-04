@@ -12,9 +12,12 @@ public class MySort {
 
     public static void main(String[] args) {
 
-        int[] arr = new Random().ints(10, 0, 15).toArray();
+        int[] arr = new Random().ints(10, 0, 20).toArray();
         System.out.println(JSON.toJSONString(arr));
-        quickSort(0, arr.length - 1, arr);
+        //快速排序
+        //quickSort(0, arr.length - 1, arr);
+        //选择排序
+        selectionSort(arr);
         System.out.println(JSON.toJSONString(arr));
     }
 
@@ -56,6 +59,29 @@ public class MySort {
         quickSort(i + 1, right, arr);
     }
 
+    /**
+     * 选择排序
+     *
+     * @param arr 待排序数组
+     */
+    public static void selectionSort(int[] arr) {
 
+        for (int i = 0; i < arr.length - 1; i++) {
+            int k = i;
+            //找出最小数的下标
+            for (int j = k + 1; j < arr.length; j++) {
+                if (arr[j] < arr[k]) {
+                    k = j;
+                }
+            }
+            //内循环结束表示找出了最小数的下标
+            if (i != k) {
+                int temp = arr[i];
+                arr[i] = arr[k];
+                arr[k] = temp;
+            }
+        }
+
+    }
 
 }
