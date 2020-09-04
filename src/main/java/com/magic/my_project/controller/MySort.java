@@ -19,7 +19,9 @@ public class MySort {
         //选择排序
         //selectionSort(arr);
         //冒泡排序
-        sort(arr);
+        //bubbleSort(arr);
+        //插入排序
+        insertSort(arr);
         System.out.println(JSON.toJSONString(arr));
     }
 
@@ -91,7 +93,7 @@ public class MySort {
      *
      * @param arr 要排序数组
      */
-    public static void sort(int[] arr) {
+    public static void bubbleSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j + 1] < arr[j]) {
@@ -100,6 +102,34 @@ public class MySort {
                     arr[j] = temp;
                 }
             }
+        }
+    }
+
+    /**
+     * 插入排序
+     *
+     * @param arr
+     */
+    public static void insertSort(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+
+            for (int k = i; k > 0 && arr[k] < arr[k - 1]; k--) {
+                int temp = arr[k];
+                arr[k] = arr[k - 1];
+                arr[k - 1] = temp;
+            }
+
+            /*int j = i;
+            while (j > 0) {
+                if (arr[j] < arr[j - 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+                    j--;
+                } else {
+                    break;
+                }
+            }*/
         }
     }
 
