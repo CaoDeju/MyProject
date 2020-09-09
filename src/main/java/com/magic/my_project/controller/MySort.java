@@ -12,7 +12,7 @@ public class MySort {
 
     public static void main(String[] args) {
 
-        int[] arr = new Random().ints(10, 0, 20).toArray();
+        int[] arr = new Random().ints(11, 0, 30).toArray();
         System.out.println(JSON.toJSONString(arr));
         //快速排序
         //quickSort(0, arr.length - 1, arr);
@@ -21,12 +21,15 @@ public class MySort {
         //冒泡排序
         //bubbleSort(arr);
         //插入排序
-        insertSort(arr);
+        //insertSort(arr);
+        //希尔排序
+        shellSort(arr);
         System.out.println(JSON.toJSONString(arr));
     }
 
     /**
      * 快速排序
+     * 分治法思想
      *
      * @param left  左下标
      * @param right 右下标
@@ -130,6 +133,34 @@ public class MySort {
                     break;
                 }
             }*/
+        }
+    }
+
+    /**
+     * 希尔排序
+     *
+     * @param arr
+     */
+    public static void shellSort(int[] arr) {
+        int length = arr.length;
+        //gap为步长，每次减为原来的一般
+        for (int gap = length / 2; gap > 0; gap /= 2) {
+            //共gap组，对每一组进行直接插入排序
+            for (int i = 0; i < gap; i++) {
+                //如果a[j] < a[j-gap]，则寻找a[j]位置，并将后面数据的位置都后移。
+                for (int j = i + gap; j < length; j += gap) {
+                    if (arr[j] < arr[j - gap]) {
+                        int temp = arr[j];
+                        int k = j - gap;
+                        while (k >= 0 && arr[k] > temp) {
+                            arr[k + gap] = arr[k];
+                            k -= gap;
+                        }
+                        arr[k + gap] = temp;
+                    }
+
+                }
+            }
         }
     }
 
