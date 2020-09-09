@@ -17,7 +17,7 @@ public class SensitiveFilterTest extends TestCase{
 		filter.put("婚礼上唱春天在哪里");
 		
 		// 待过滤的句子
-		String sentence = "然后，市长在婚礼上唱春天在哪里。";
+		String sentence = "然后，市长在婚礼上唱春天在哪里，哈哈sb。";
 		// 进行过滤
 		String filted = filter.filter(sentence, '*');
 		
@@ -38,8 +38,9 @@ public class SensitiveFilterTest extends TestCase{
 		filter.put("你好2");
 		filter.put("你好3");
 		filter.put("你好4");
-		
-		System.out.println(filter.filter("你好3天不见", '*'));
+		filter.put("sb");
+
+		System.out.println(filter.filter("你.好天你好不见sb你帅1你好好sb", '*'));
 		
 	}
 	

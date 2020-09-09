@@ -1,5 +1,7 @@
 package com.magic.my_project.sensitive_word;
 
+import org.springframework.util.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -83,11 +85,14 @@ public class SensitiveFilter implements Serializable{
 	 */
 	public boolean put(String word){
 		// 长度小于2的不加入
-		if(word == null || word.trim().length() < 2){
+		/*if(word == null || word.trim().length() < 2){
 			return false;
 		}
 		// 两个字符的不考虑
 		if(word.length() == 2 && word.matches("\\w\\w")){
+			return false;
+		}*/
+		if (StringUtils.isEmpty(word.trim())){
 			return false;
 		}
 		StringPointer sp = new StringPointer(word.trim());
@@ -149,7 +154,7 @@ public class SensitiveFilter implements Serializable{
 		
 		// 匹配的起始位置
 		int i = 0;
-		while(i < sp.length - 2){
+		while(i < sp.length - 1){
 			/*
 			 * 移动到下一个匹配位置的步进：
 			 * 如果未匹配为1，如果匹配是匹配的词长度

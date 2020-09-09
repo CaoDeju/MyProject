@@ -45,7 +45,8 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 	 * @date 2017年1月5日 下午2:23:02
 	 */
 	public int nextTwoCharHash(int i){
-		return 31 * value[offset + i] + value[offset + i + 1];
+		//return 31 * value[offset + i] + value[offset + i + 1];
+		return 31 * value[offset + i];
 	}
 	
 	/**
@@ -58,7 +59,8 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 	 * @date 2017年1月5日 下午2:46:58
 	 */
 	public int nextTwoCharMix(int i){
-		return (value[offset + i] << 16) | value[offset + i + 1];
+		//return (value[offset + i] << 16) | value[offset + i + 1];
+		return (value[offset + i] << 16);
 	}
 	
 	/**
