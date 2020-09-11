@@ -1,7 +1,11 @@
 package com.magic.my_project.sensitivewd;
 
 
-import org.springframework.util.StringUtils;
+
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.*;
 import java.util.*;
@@ -18,8 +22,9 @@ import java.util.*;
  */
 public class WordFilter {
 
-    private static final FilterSet set = new FilterSet(); // 存储首字
-    private static final Map<Integer, WordNode> nodes = new HashMap<Integer, WordNode>(1024, 1); // 存储节点
+    //private static final FilterSet set = new FilterSet(); // 存储首字
+    private static final Set<Integer> set = new HashSet<>(); // 存储首字
+    private static final Map<Integer, WordNode> nodes = new HashMap<>(1024, 1); // 存储节点
     private static final Set<Integer> stopwdSet = new HashSet<>(); // 停顿词
     private static final char SIGN = '*'; // 敏感词过滤替换
 
@@ -35,7 +40,7 @@ public class WordFilter {
 
     private static void init() {
         // 获取敏感词
-        addSensitiveWord(readWordFromFile("./src/main/resources/wd.txt"));
+        addSensitiveWord(readWordFromFile("./src/main/resources/words.txt"));
         //addSensitiveWord(readWordFromFile("wd.txt"));
         addStopWord(readWordFromFile("./src/main/resources/stopwd.txt"));
         //addStopWord(readWordFromFile("stopwd.txt"));
@@ -57,7 +62,7 @@ public class WordFilter {
             String readLine;
             words = new ArrayList<>(1200);
             while ((readLine = br.readLine()) != null) {
-                if (!StringUtils.isEmpty(readLine)) {
+                if (StringUtils.isNotBlank(readLine)) {
                     words.add(readLine);
                 }
             }
@@ -196,7 +201,7 @@ public class WordFilter {
      * @return
      */
     public static final boolean isContains(final String src) {
-        if (set != null && nodes != null) {
+        if (CollectionUtils.isNotEmpty(set) && MapUtils.isNotEmpty(nodes)) {
             char[] chs = src.toCharArray();
             int length = chs.length;
             int currc; // 当前检查的字符
@@ -225,7 +230,7 @@ public class WordFilter {
                     if (temp == cpcurrc) {
                         continue;
                     }
-                    if (stopwdSet != null && stopwdSet.contains(temp)) {
+                    if (CollectionUtils.isNotEmpty(stopwdSet) && stopwdSet.contains(temp)) {
                         continue;
                     }
                     node = node.querySub(temp);

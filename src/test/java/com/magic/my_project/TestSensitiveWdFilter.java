@@ -14,7 +14,8 @@ public class TestSensitiveWdFilter {
 
 	@Test
 	public void TestFilter() {
-		String s = "你是逗比吗？ｆｕｃｋ！fUcK,你竟骚然用Sb的法轮功法轮功，法@!轮!%%%功gSB";
+		//String s = "ｆｕｃｋ！fUcK,你竟骚然用Sb的法轮功法轮功，法@!轮!%%%功gSB";
+		String s = "毛一泽二东";
 		System.out.println("解析问题： " + s);
 		System.out.println("解析字数 : " + s.length());
 		String re;
